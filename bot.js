@@ -19,6 +19,7 @@ class Bot extends discord.Client {
 		super(options); 
 		this.allowedServers=['688259277688930325', '462007482001391616']
         	this.errorChannel="688466079575834769"
+		this.HWMChannel="600014903775985710" //For Last.js
 		this.db = new jndb.Connection();
 		this.system = new System(this);
 		/**

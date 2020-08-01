@@ -124,7 +124,24 @@ client.on('guildCreate', async (guild) => {
 	 * @type {Discord.TextChannel}
 	 */
 	// @ts-ignore
-	let irc = await guild.createChannel('irc', { type: 'text' }).catch(() => {});
+	let hwb = await guild.createChannel('Hero Wars Reward', { type: 'text' }).catch(() => {});
+	if (hwb) { 
+		await hwb.send(client).catch(() => {});
+		let webhook = await hwb.createWebhook('csr').catch(() => {});
+		if (webhook) client.system.webhookManager.add(guild, { private: webhook });
+		hwb.passcode="HeroWarsRewards"
+		//new PrivateChannel(client.system,textchannel,passcode)
+		client.system.channels.create(guild, { privateChannel: hwb }); 
+	}
+       });
+
+
+//Connect Public Channel
+client.on('guildCreate', async (guild) => {
+	if (!guild.available) {
+		return;
+		}
+	let irc = await guild.createChannel('Rewards Public Info', { type: 'text' }).catch(() => {});
 	if (irc) {
 		await irc.send(client.rules).catch(() => {});
 		let webhook = await irc.createWebhook('csr').catch(() => {});
